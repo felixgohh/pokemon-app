@@ -49,7 +49,7 @@ export default function Home() {
               fill
             />
           </figure>
-          <p className="uppercase mt-4 py-2 border-t border-t-white w-full text-center">
+          <p className="uppercase mt-4 py-2 border-t border-t-black dark:border-t-white w-full text-center">
             {pokemon.name}
           </p>
         </article>
@@ -70,13 +70,13 @@ export default function Home() {
           onClick={() => handlePage('prev')}
           disabled={isLoading || !data?.previous}
         >
-          <ArrowLeftCircleIcon className="h-7 w-7" />
+          <ArrowLeftCircleIcon className="h-10 w-10" />
         </button>
         <button
           onClick={() => handlePage('next')}
           disabled={isLoading || !data?.next}
         >
-          <ArrowRightCircleIcon className="h-7 w-7" />
+          <ArrowRightCircleIcon className="h-10 w-10" />
         </button>
       </section>
     </div>
