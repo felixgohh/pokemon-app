@@ -38,7 +38,7 @@ export default function Home() {
 
   const PokemonCard = ({ pokemon, index }: PokemonCardProps) => {
     return (
-      <Link href={`/pokemon/${index + 1}`} key={pokemon.url}>
+      <Link href={`/pokemon/${pokemon.name}`}>
         <article className="flex flex-col items-center justify-center border-4 shadow-thick rounded-lg border-black dark:border-white">
           <figure className="relative aspect-square w-[90%] h-[20vh] md:h-[30vh]">
             <Image
