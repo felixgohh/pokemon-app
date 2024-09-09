@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
-import PokeballIcon from '@/components/icons/PokeballIcon';
 import Link from 'next/link';
 import { HomeIcon } from '@heroicons/react/24/solid';
 import { BookmarkIcon } from '@heroicons/react/24/solid';
 import Providers from './providers';
+import BackButton from '@/components/BackButton';
+import pokeballIcon from '@/assets/pokeball.png';
+import Image from 'next/image';
 
 const poppins = Poppins({
   weight: ['600', '700'],
@@ -30,8 +32,14 @@ export default function RootLayout({
         <Providers>
           <div className="flex flex-col w-full h-[100vh]">
             <header className="sticky top-0 z-50 w-full flex flex-row justify-center items-center p-4 text-black bg-light-header dark:bg-dark-header">
+              <BackButton />
               <span className="animate-bounce">
-                <PokeballIcon size={48} color="#000" />
+                <Image
+                  src={pokeballIcon}
+                  width={48}
+                  height={48}
+                  alt="pokeball-icon"
+                />
               </span>
             </header>
             <main className="py-10 h-full  overflow-auto px-8 md:p-20 bg-light-main dark:bg-dark-main text-black dark:text-white">
