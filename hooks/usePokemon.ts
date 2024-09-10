@@ -1,47 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-
-export type PokemonItem = {
-  name: string;
-  url: string;
-};
-
-type PokemonData = {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: PokemonItem[];
-};
-
-type PokemonAbility = {
-  ability: PokemonItem;
-  is_hidden: boolean;
-  slot: number;
-};
-
-type PokemonMove = {
-  move: PokemonItem;
-};
-
-type PokemonStat = {
-  base_stat: number;
-  stat: PokemonItem;
-};
-
-type PokemonType = {
-  slot: number;
-  type: PokemonItem;
-};
-
-type PokemonDetail = {
-  id: string;
-  height: number;
-  name: string;
-  weight: number;
-  types: PokemonType[];
-  stats: PokemonStat[];
-  abilities: PokemonAbility[];
-  moves: PokemonMove[];
-};
+import { PokemonData, PokemonDetail } from '@/shared/types/pokemon.type';
 
 const fetchPokemenList = async (
   offset: number | null
