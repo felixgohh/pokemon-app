@@ -127,8 +127,8 @@ export default function PokemonBattlePage({
           <Image
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${data?.id}.svg`}
             alt={data?.name ?? 'pokemon'}
-            width={200}
-            height={200}
+            width={120}
+            height={120}
           />
         </figure>
         <div className="mt-auto flex flex-col items-center gap-4 mb-4">
