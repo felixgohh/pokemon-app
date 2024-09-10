@@ -4,23 +4,17 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-
-type MyPokemon = {
-  name: string;
-  nickname: string;
-  id: string;
-};
+import { MyPokemon } from '@/shared/types/pokemon.type';
 
 export default function MyPokemonPage() {
   const [pokemonList, setPokemonList] = useState<MyPokemon[] | null | []>(
-    JSON.parse(localStorage.getItem('my_pokemons') || 'null')
+    typeof window !== 'undefined'
+      ? JSON.parse(localStorage.getItem('my_pokemons') || 'null')
+      : []
   );
 
   const removePokemon = (pokemon: MyPokemon) => {
     if (pokemonList && pokemonList.length) {
-      console.log(pokemon, '===pokemon');
-      console.log(pokemonList);
-
       const newList = pokemonList.filter(
         (poke) =>
           poke.name !== pokemon.name && poke.nickname !== pokemon.nickname
