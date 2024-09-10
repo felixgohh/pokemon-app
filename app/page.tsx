@@ -31,9 +31,13 @@ export default function Home() {
   }, [searchParams]);
 
   const handlePage = (option: string) => {
-    const urlObject = new URL(option === 'prev' ? data?.previous : data?.next);
-    const offset = urlObject.searchParams.get('offset');
-    router.push(`/?offset=${offset}`);
+    const urlString = option === 'prev' ? data?.previous : data?.next;
+
+    if (urlString) {
+      const urlObject = new URL(urlString);
+      const offset = urlObject.searchParams.get('offset');
+      router.push(`/?offset=${offset}`);
+    }
   };
 
   const PokemonCard = ({ pokemon, index }: PokemonCardProps) => {
