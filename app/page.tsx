@@ -65,20 +65,22 @@ export default function Home() {
         ))}
       </section>
 
-      <section className="mt-6 w-full flex justify-between items-center dark:text-white text-black">
-        <button
-          onClick={() => handlePage('prev')}
-          disabled={isLoading || !data?.previous}
-        >
-          <ArrowLeftCircleIcon className="h-10 w-10" />
-        </button>
-        <button
-          onClick={() => handlePage('next')}
-          disabled={isLoading || !data?.next}
-        >
-          <ArrowRightCircleIcon className="h-10 w-10" />
-        </button>
-      </section>
+      {data && data.results ? (
+        <section className="mt-6 w-full flex justify-between items-center dark:text-white text-black">
+          <button
+            onClick={() => handlePage('prev')}
+            disabled={isLoading || !data?.previous}
+          >
+            <ArrowLeftCircleIcon className="h-10 w-10" />
+          </button>
+          <button
+            onClick={() => handlePage('next')}
+            disabled={isLoading || !data?.next}
+          >
+            <ArrowRightCircleIcon className="h-10 w-10" />
+          </button>
+        </section>
+      ) : null}
     </div>
   );
 }
