@@ -11,6 +11,7 @@ import {
 } from '@heroicons/react/24/solid';
 import { usePokemonList } from '@/hooks/usePokemon';
 import { PokemonItem } from '@/shared/types/pokemon.type';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 type PokemonCardProps = {
   pokemon: PokemonItem;
@@ -96,7 +97,7 @@ const HomeContent = () => {
 
 export default function Home() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<LoadingSpinner />}>
       <HomeContent />
     </Suspense>
   );
