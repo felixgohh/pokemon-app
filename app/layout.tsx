@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
-import './globals.css';
 import Link from 'next/link';
 import { HomeIcon } from '@heroicons/react/24/solid';
 import { BookmarkIcon } from '@heroicons/react/24/solid';
@@ -8,6 +7,9 @@ import Providers from './providers';
 import BackButton from '@/components/BackButton';
 import pokeballIcon from '@/assets/pokeball.png';
 import Image from 'next/image';
+import './globals.css';
+import 'react-toastify/dist/ReactToastify.css';
+import ToastProvider from '@/components/ToastContainer';
 
 const poppins = Poppins({
   weight: ['600', '700'],
@@ -30,38 +32,46 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.className} antialiased`}>
         <Providers>
-          <div className="flex flex-col w-full h-[100vh]">
-            <header className="sticky top-0 z-50 w-full flex flex-row justify-center items-center p-4 text-black bg-light-header dark:bg-dark-header">
-              <BackButton />
-              <span className="animate-bounce">
-                <Image
-                  src={pokeballIcon}
-                  width={48}
-                  height={48}
-                  alt="pokeball-icon"
-                />
-              </span>
-            </header>
-            <main className="py-10 h-full  overflow-auto px-8 md:p-20 bg-light-main dark:bg-dark-main text-black dark:text-white">
-              {children}
-            </main>
-            <nav className="sticky w-full z-50 bottom-0 p-2 bg-light-footer dark:bg-dark-footer text-black dark:text-white border-t border-t-white rounded-tl-2xl rounded-tr-2xl">
-              <ul className="flex flex-row justify-between items-center text-center">
-                <li className="w-[45%]">
-                  <Link href={'/'} className="flex flex-col gap-1 items-center">
-                    <HomeIcon className="h-7 w-7" />
-                    Home
-                  </Link>
-                </li>
-                <li className="w-[45%]">
-                  <Link href={'/'} className="flex flex-col gap-1 items-center">
-                    <BookmarkIcon className="h-7 w-7" />
-                    My Pokemon
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-          </div>
+          <ToastProvider>
+            <div className="flex flex-col w-full h-[100vh]">
+              <header className="sticky top-0 z-50 w-full flex flex-row justify-center items-center p-4 text-black bg-light-header dark:bg-dark-header">
+                <BackButton />
+                <span className="animate-bounce">
+                  <Image
+                    src={pokeballIcon}
+                    width={48}
+                    height={48}
+                    alt="pokeball-icon"
+                  />
+                </span>
+              </header>
+              <main className="relative h-full overflow-auto bg-light-main dark:bg-dark-main text-black dark:text-white">
+                {children}
+              </main>
+              <nav className="sticky w-full z-50 bottom-0 p-2 bg-light-footer dark:bg-dark-footer text-black dark:text-white border-t border-t-white rounded-tl-2xl rounded-tr-2xl">
+                <ul className="flex flex-row justify-between items-center text-center">
+                  <li className="w-[45%]">
+                    <Link
+                      href={'/'}
+                      className="flex flex-col gap-1 items-center"
+                    >
+                      <HomeIcon className="h-7 w-7" />
+                      Home
+                    </Link>
+                  </li>
+                  <li className="w-[45%]">
+                    <Link
+                      href={'/'}
+                      className="flex flex-col gap-1 items-center"
+                    >
+                      <BookmarkIcon className="h-7 w-7" />
+                      My Pokemon
+                    </Link>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </ToastProvider>
         </Providers>
       </body>
     </html>
