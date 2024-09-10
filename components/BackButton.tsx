@@ -8,7 +8,7 @@ export default function BackButton() {
   const pathname = usePathname();
   const router = useRouter();
 
-  if (pathname !== '/') {
+  if (pathname !== '/' && pathname !== '/my-pokemon') {
     return (
       <button
         type="button"
