@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -9,14 +9,40 @@ import {
   ArrowLeftCircleIcon,
   ArrowRightCircleIcon,
 } from '@heroicons/react/24/solid';
-import { PokemonItem, usePokemonList } from '@/hooks/usePokemon';
+import { usePokemonList } from '@/hooks/usePokemon';
+import { PokemonItem } from '@/shared/types/pokemon.type';
 
 type PokemonCardProps = {
   pokemon: PokemonItem;
   index: number;
 };
 
-export default function Home() {
+const PokemonCard = ({ pokemon, index }: PokemonCardProps) => {
+  const searchParams = useSearchParams();
+  const offsetParam = searchParams.get('offset');
+  const offset = offsetParam ? Number(offsetParam) : 0;
+
+  return (
+    <Link href={`/pokemon/${pokemon.name}`}>
+      <article className="flex flex-col items-center justify-center border-4 shadow-thick rounded-lg border-black dark:border-white">
+        <figure className="relative aspect-square w-[90%] h-[20vh] md:h-[30vh]">
+          <Image
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${
+              Number(offset) + index + 1
+            }.svg`}
+            alt={pokemon.name}
+            fill
+          />
+        </figure>
+        <p className="uppercase mt-4 py-2 border-t border-t-black dark:border-t-white w-full text-center">
+          {pokemon.name}
+        </p>
+      </article>
+    </Link>
+  );
+};
+
+const HomeContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -31,30 +57,13 @@ export default function Home() {
   }, [searchParams]);
 
   const handlePage = (option: string) => {
-    const urlObject = new URL(option === 'prev' ? data?.previous : data?.next);
-    const offset = urlObject.searchParams.get('offset');
-    router.push(`/?offset=${offset}`);
-  };
+    const urlString = option === 'prev' ? data?.previous : data?.next;
 
-  const PokemonCard = ({ pokemon, index }: PokemonCardProps) => {
-    return (
-      <Link href={`/pokemon/${pokemon.name}`}>
-        <article className="flex flex-col items-center justify-center border-4 shadow-thick rounded-lg border-black dark:border-white">
-          <figure className="relative aspect-square w-[90%] h-[20vh] md:h-[30vh]">
-            <Image
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${
-                Number(offset) + index + 1
-              }.svg`}
-              alt={pokemon.name}
-              fill
-            />
-          </figure>
-          <p className="uppercase mt-4 py-2 border-t border-t-black dark:border-t-white w-full text-center">
-            {pokemon.name}
-          </p>
-        </article>
-      </Link>
-    );
+    if (urlString) {
+      const urlObject = new URL(urlString);
+      const offset = urlObject.searchParams.get('offset');
+      router.push(`/?offset=${offset}`);
+    }
   };
 
   return (
@@ -82,5 +91,13 @@ export default function Home() {
         </section>
       ) : null}
     </div>
+  );
+};
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <HomeContent />
+    </Suspense>
   );
 }

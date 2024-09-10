@@ -1,6 +1,7 @@
 'use client';
 
 import { usePokemonDetail } from '@/hooks/usePokemon';
+import { MyPokemon } from '@/shared/types/pokemon.type';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -62,7 +63,8 @@ export default function PokemonBattlePage({
           router.back();
         } else {
           const existed = myPokemons.filter(
-            (poke) => poke.nickname === nickname && poke.name === data?.name
+            (poke: MyPokemon) =>
+              poke.nickname === nickname && poke.name === data?.name
           );
           if (existed.length) {
             return toastErrMessage(
