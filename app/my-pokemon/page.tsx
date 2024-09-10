@@ -25,7 +25,7 @@ export default function MyPokemonPage() {
   };
 
   if (!pokemonList || !pokemonList.length) {
-    return <p className="text-center my-8">No Pokemon catched!</p>;
+    return <p className="text-center my-8">No Pokemon caught yet!</p>;
   }
 
   const PokemonCard = ({ pokemon }: { pokemon: MyPokemon }) => {
