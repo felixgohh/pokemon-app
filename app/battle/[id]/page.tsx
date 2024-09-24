@@ -83,7 +83,7 @@ export default function PokemonBattlePage({
 
     return (
       <div className="fixed w-full h-[100vh] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[100] flex justify-center items-center bg-black bg-opacity-50">
-        <div className="relative p-6 w-3/4 bg-white rounded-lg shadow">
+        <div className="relative p-6 w-3/4 md:w-1/4 bg-white rounded-lg shadow">
           <h3 className="text-xl font-semibold text-gray-900 capitalize text-center">
             You have caught {data?.name}
           </h3>
