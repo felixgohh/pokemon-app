@@ -15,10 +15,7 @@ export default function MyPokemonPage() {
 
   const removePokemon = (pokemon: MyPokemon) => {
     if (pokemonList && pokemonList.length) {
-      const newList = pokemonList.filter(
-        (poke) =>
-          poke.name !== pokemon.name && poke.nickname !== pokemon.nickname
-      );
+      const newList = pokemonList.filter((poke) => poke !== pokemon);
       setPokemonList(newList);
       localStorage.setItem('my_pokemons', JSON.stringify(newList));
     }
